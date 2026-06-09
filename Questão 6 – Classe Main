@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Notificacao> notificacoes = new ArrayList<>();
+        ServicoNotificacao servico = new ServicoNotificacao();
+
+        System.out.println("1 - E-mail");
+        System.out.println("2 - SMS");
+        System.out.println("3 - WhatsApp");
+        System.out.print("Escolha uma opção: ");
+
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Digite a mensagem: ");
+        String mensagem = scanner.nextLine();
+
+        Notificacao notificacao = null;
+
+        switch (opcao) {
+            case 1:
+                notificacao = new NotificacaoEmail();
+                break;
+            case 2:
+                notificacao = new NotificacaoSms();
+                break;
+            case 3:
+                notificacao = new NotificacaoWhatsApp();
+                break;
+            default:
+                System.out.println("Opção inválida!");
+                return;
+        }
+
+        notificacoes.add(notificacao);
+        servico.notificarCliente(notificacao, mensagem);
+
+        scanner.close();
+    }
+}
